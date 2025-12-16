@@ -1,0 +1,49 @@
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode
+build/
+*.derivedData
+*.hmap
+*.ipa
+*.tba
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
+
+# Xcode Patch
+*.xccheckout
+*.moved-aside
+*.pro
+*.essd
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# CocoaPods
+# We generally recommend not adding the Pods directory to your repository.
+Pods/
+# Keep the Podfile.lock usually, but some teams ignore it. Standard is to KEEP it.
+
+# Carthage
+Carthage/Build/
+
+# fastlane
+# It is recommended to not store the screenshots in the git repo.
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Miscellaneous
+*.hmap
+*.profdata
+*.profraw
+*.log
+
+# Ruby/Bundler (This was missing from the previous list)
+.bundle/
+vendor/bundle/

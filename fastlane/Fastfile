@@ -1,0 +1,20 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Run Unit Tests"
+  lane :pr_check do
+    # 1. Check Code Style
+    # strict: true -> Fails the build if there are warnings/errors
+    swiftlint(
+      mode: :lint,
+      config_file: ".swiftlint.yml"
+    )
+    # 2. Run Tests
+    run_tests(
+      project: "dummyProject/dummyProject.xcodeproj",
+      scheme: "dummyProject",
+      device: "iPhone 15",
+      clean: true
+    )
+  end
+end
