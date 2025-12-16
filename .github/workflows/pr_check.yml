@@ -1,0 +1,22 @@
+name: PR Check
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run Tests Locally
+    runs-on: macos-15  # <--- This matches your -P macos-15 flag
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Fastlane (Simulation)
+        run: |
+          echo "🚀 Simulating Fastlane on Host..."
+          # Uncomment the next line when you are ready to actually run it
+          # bundle exec fastlane pr_check 
+          echo "✅ Done!"
