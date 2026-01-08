@@ -1,10 +1,10 @@
 name: iOS starter workflow
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -22,7 +22,9 @@ jobs:
           bundler-cache: true
       
       - name: Install Dependencies
-        run: bundle install
+        run: |
+          brew install swiftlint
+          bundle install
 
       - name: Run Fastlane
         run: bundle exec fastlane ios pr_check
