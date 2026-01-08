@@ -1,15 +1,23 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Run Unit Tests"
+  desc "Run Pipeline"
   lane :pr_check do
-    # 1. Check Code Style
-    # strict: true -> Fails the build if there are warnings/errors
-    swiftlint(
-      mode: :lint,
-      config_file: ".swiftlint.yml"
-    )
-    # 2. Run Tests
+    ENV['DEVELOPER_DIR'] = ENV['DEVELOPER_DIR'] || '/Applications/Xcode.app/Contents/Developer'
+    swiftlint(mode: :lint, config_file: ".swiftlint.yml")
+    
+    if ENV['SONAR_HOST_URL'] && !ENV['SONAR_HOST_URL'].empty?
+        sonar(
+           project_key: "PipelineTest",
+           project_name: "PipelineTest",
+           project_version: "1.0",
+           sources_path: "dummyProject",
+           sonar_runner_args: "-Dsonar.host.url=#{ENV['SONAR_HOST_URL']} -Dsonar.login=#{ENV['SONAR_LOGIN'] || 'admin'} -Dsonar.password=#{ENV['SONAR_PASSWORD'] || 'admin123'}"
+        )
+    else
+        UI.message("⚠️  Skipping SonarQube analysis: SONAR_HOST_URL not set")
+    end
+
     run_tests(
       project: "dummyProject/dummyProject.xcodeproj",
       scheme: "dummyProject",
